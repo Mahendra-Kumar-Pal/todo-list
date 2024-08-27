@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DataTables;
 use App\Models\Todolist;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class TodolistController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View|JsonResponse
     {
         if ($request->ajax()) {
             $data = Todolist::select('id', 'task', 'status')->get();
@@ -25,7 +27,7 @@ class TodolistController extends Controller
         return view('to-do-list');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'task' => 'required|string|unique:todolists,task'
@@ -38,7 +40,7 @@ class TodolistController extends Controller
         return response()->json(['message' => 'Task added successfully.']);
     }
 
-    public function updateStatus($id)
+    public function updateStatus($id): JsonResponse
     {
         $task = Todolist::find($id);
         if ($task) {
@@ -50,7 +52,7 @@ class TodolistController extends Controller
         }
     }
 
-    public function markAll(Request $request, $status = null)
+    public function markAll(Request $request): JsonResponse
     {
         if ($request->ajax()) {
             $currentStatus = Todolist::whereNotNull('status')->first()->status ?? null;
@@ -60,7 +62,7 @@ class TodolistController extends Controller
         }
     }
     
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $task = Todolist::find($id);
         if ($task) {

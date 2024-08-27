@@ -19,7 +19,7 @@
                 <form action="{{ route('todo-list.store') }}" method="post" id="add-task-form">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="task" placeholder="Add task..." aria-describedby="basic-addon2" required>
+                        <input type="text" class="form-control" name="task" placeholder="Add task..." aria-describedby="basic-addon2" >
                         <button type="submit" class="input-group-text bg-primary text-white" id="basic-addon2">Add Task</button>
                     </div>
                 </form>
@@ -66,7 +66,6 @@
 @push('script')
     <script type="text/javascript">
         $(function () {
-            
             var table = $('.data-table').DataTable({
                 processing: true,
                 serverSide: true,
@@ -78,7 +77,6 @@
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });
-            
         });
   </script>
   <script>
@@ -97,6 +95,7 @@
                     setTimeout(function() {
                         $('#success-alert').fadeOut('slow');
                     }, 5000);
+                    $('input[name="task"]').val('');
                     $('.data-table').DataTable().ajax.reload();
                 },
                 error: function(xhr) {
@@ -105,7 +104,7 @@
                     $.each(errors, function(key, value) {
                         errorMessages += value[0] + '<br>';
                     });
-                    $('input[name="task"]').val('');
+                    $('input[name="task"]').focus();
                     Swal.fire(
                         'Error!',
                         errorMessages,

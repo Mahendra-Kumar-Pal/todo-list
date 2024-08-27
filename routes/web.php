@@ -24,6 +24,6 @@ Route::group(['prefix' => 'todo-list', 'as' => 'todo-list.'], function(){
         Route::post('/store', 'store')->name('store');
         Route::delete('/delete/{id}', 'destroy')->name('delete');
         Route::post('/update-status/{id}', 'updateStatus')->name('updateStatus');
-        Route::post('/mark-all/{status?}', 'markAll')->name('markAll');
+        Route::post('/mark-all', 'markAll')->name('markAll');
     });
 });
