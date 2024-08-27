@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary text-white">
     <div class="container">
       <h2>
-        <a class="navbar-brand text-white" href="{{ url('/') }}">WebName</a>
+        <a class="navbar-brand text-white" href="{{ url('/') }}">WebReinvent</a>
       </h2>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
